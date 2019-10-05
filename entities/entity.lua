@@ -16,6 +16,10 @@ function Entity:initialize()
   self.drawColor = nil
 end
 
+function Entity:spawn()
+end
+
+
 function Entity:update(dt)
 end
 
@@ -29,7 +33,7 @@ function Entity:draw()
 
   -- Draw rectangle
   if self.drawable then
-    love.graphics.draw(self.drawable, 0, 0) --self.drawStyle, self.rect.x, self.rect.y, self.rect.w, self.rect.h)
+    love.graphics.draw(self.drawable, self.rect.x or 0, self.rect.y or 0) --self.drawStyle, self.rect.x, self.rect.y, self.rect.w, self.rect.h)
   end
 end
 

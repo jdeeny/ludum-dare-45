@@ -34,9 +34,9 @@ function GamePlay:enter()
     self.tree:spawn()
 
     self.entities[#self.entities+1] = self.player
-    self.entities[#self.entities+1] = self.mario
-    self.entities[#self.entities+1] = self.rock
-    self.entities[#self.entities+1] = self.tree
+    --self.entities[#self.entities+1] = self.mario
+    --self.entities[#self.entities+1] = self.rock
+    --self.entities[#self.entities+1] = self.tree
 end
 
 function GamePlay:exit()
@@ -54,9 +54,7 @@ end
 function GamePlay:draw()
   love.graphics.setColor(gameWorld.colors.white)
   love.graphics.clear(gameWorld.colors.black)
-  print("game draw"..#self.entities)
   for i, e in ipairs(self.entities) do
-    print("Print"..i)
     e:draw()
   end
 
