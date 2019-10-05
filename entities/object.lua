@@ -10,7 +10,8 @@ function Object:initialize()
 end
 
 ---- SPAWN ----
-function Object:spawn()
+function Object:spawn(bumpWorld)
+  Entity.spawn(self, bumpWorld)
 end
 
 

@@ -10,12 +10,11 @@ function Dude:initialize()
   self.drawable = gameWorld.assets.sprites.snowman
   self.rect:set(100, 100, self.drawable:getWidth(), self.drawable:getHeight())
   self.speed = 10
-
 end
 
 ---- SPAWN ----
-function Dude:spawn()
-  Entity.spawn(self, dt)
+function Dude:spawn(bumpWorld)
+  Entity.spawn(self, bumpWorld)
 end
 
 

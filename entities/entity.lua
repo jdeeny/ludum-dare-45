@@ -7,6 +7,7 @@ function Entity:initialize()
   self.isActive = false
 
   -- Collision properties
+  self.bumpWorld = nil
   self.rect = rect:new()        -- Init rectangle
   self.props = {}               -- Init properties
   self.rect.props = self.props  -- Store property info in rect
@@ -14,9 +15,16 @@ function Entity:initialize()
   -- Drawing properties
   self.drawStyle = 'fill'
   self.drawColor = nil
+
 end
 
-function Entity:spawn()
+function Entity:addToWorld(bumpWorld)
+  self.bumpWorld = bumpWorld
+  self.bumpWorld:add(self.rect, self.rect.x, self.rect.y, self.rect.w, self.rect.h)
+end
+
+function Entity:spawn(bumpWorld)
+  self:addToWorld(bumpWorld)
 end
 
 

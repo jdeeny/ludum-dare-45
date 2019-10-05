@@ -10,7 +10,8 @@ function Enemy:initialize()
 end
 
 ---- SPAWN ----
-function Enemy:spawn()
+function Enemy:spawn(bumpWorld)
+  Entity.spawn(self, bumpWorld)
 end
 
 

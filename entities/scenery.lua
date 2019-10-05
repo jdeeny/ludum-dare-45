@@ -10,9 +10,9 @@ function Scenery:initialize()
 end
 
 ---- SPAWN ----
-function Scenery:spawn()
+function Scenery:spawn(bumpWorld)
+  Entity.spawn(self, bumpWorld)
 end
-
 
 ---- UPDATE ----
 function Scenery:update(dt)

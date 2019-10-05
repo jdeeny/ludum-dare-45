@@ -10,7 +10,8 @@ function Pickup:initialize()
 end
 
 ---- SPAWN ----
-function Pickup:spawn()
+function Pickup:spawn(bumpWorld)
+  Entity.spawn(self, bumpWorld)
 end
 
 
