@@ -18,11 +18,4 @@ end
 function Object:update(dt)
 end
 
----- DRAW ----
-function Object:draw()
-  love.graphics.setColor(1.0, 1.0, 1.0, 1.0)
-
-end
-
-
 return Object

@@ -8,20 +8,5 @@ function Rock:initialize()
   Object.initialize(self)
 end
 
----- SPAWN ----
-function Rock:spawn()
-end
-
-
----- UPDATE ----
-function Rock:update(dt)
-end
-
----- DRAW ----
-function Rock:draw()
-  love.graphics.setColor(1.0, 1.0, 1.0, 1.0)
-
-end
-
 
 return Rock

@@ -28,12 +28,8 @@ function Entity:draw()
   end
 
   -- Draw rectangle
-  if self.animation_test then
-    local image = self.animation_test[1]
-    local anim = self.animation_test[2]
-    anim:draw(image, self.rect.x, self.rect.y)
-  else
-    love.graphics.rectangle(self.drawStyle, self.rect.x, self.rect.y, self.rect.w, self.rect.h)
+  if self.drawable then
+    love.graphics.draw(self.drawable, 0, 0) --self.drawStyle, self.rect.x, self.rect.y, self.rect.w, self.rect.h)
   end
 end
 

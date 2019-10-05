@@ -18,11 +18,4 @@ end
 function Enemy:update(dt)
 end
 
----- DRAW ----
-function Enemy:draw()
-  love.graphics.setColor(1.0, 1.0, 1.0, 1.0)
-
-end
-
-
 return Enemy

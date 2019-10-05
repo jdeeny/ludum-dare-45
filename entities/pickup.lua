@@ -18,11 +18,4 @@ end
 function Pickup:update(dt)
 end
 
----- DRAW ----
-function Pickup:draw()
-  love.graphics.setColor(1.0, 1.0, 1.0, 1.0)
-
-end
-
-
 return Pickup

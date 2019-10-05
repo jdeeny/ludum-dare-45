@@ -7,6 +7,8 @@ local Dude = class('Dude', Entity)
 
 function Dude:initialize()
   Entity.initialize(self)
+
+  self.drawable = gameWorld.assets.sprites.snowman
 end
 
 ---- SPAWN ----
@@ -17,12 +19,5 @@ end
 ---- UPDATE ----
 function Dude:update(dt)
 end
-
----- DRAW ----
-function Dude:draw()
-  love.graphics.setColor(1.0, 1.0, 1.0, 1.0)
-
-end
-
 
 return Dude
