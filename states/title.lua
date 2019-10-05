@@ -15,6 +15,9 @@ function Title:exit()
 end
 
 function Title:update(dt)
+  if (gameWorld.playerInput:pressed('fire') or gameWorld.playerInput:pressed('sel')) then
+    gameWorld.gameState:setState('gameplay')
+  end
 end
 
 

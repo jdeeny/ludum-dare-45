@@ -1,48 +1,47 @@
 local baton = require 'lib.baton'
+local controls = {}
+
+-- Always switch to a newly connected joystick
+function love.joystickadded(j)
+  player_input.joystick = j
+end
+
+-- Always switch to a newly pressed joystick
+function love.joystickpressed(j, _)
+  if player_input.joystick ~= j then
+    player_input.joystick = j
+  end
+end
 
 return baton.new {
-  controls = {
-    -- Directions:  WASD, arrows, gamepad left stick, or gamepad d-pad
-    left = {'key:left', 'key:a', 'axis:leftx-', 'button:dpleft'},
-    right = {'key:right', 'key:d', 'axis:leftx+', 'button:dpright'},
-    up = {'key:up', 'key:w', 'axis:lefty-', 'button:dpup'},
-    down = {'key:down', 'key:s', 'axis:lefty+', 'button:dpdown'},
+    controls = {
+      moveleft = {'key:a', 'axis:leftx-', 'button:dpleft'},
+      moveright = {'key:d', 'axis:leftx+', 'button:dpright'},
+      moveup = {'key:w', 'axis:lefty-', 'button:dpup'},
+      movedown = {'key:s', 'axis:lefty+', 'button:dpdown'},
 
-    -- Action buttons for Gamepad
-    --           Y (alt swap)
-    -- X (swap)              B (pour)
-    --             A (action/throw)
+      aimleft = {'key:left', 'axis:rightx-'},
+      aimright = {'key:right', 'axis:rightx+'},
+      aimup = {'key:up', 'axis:righty-'},
+      aimdown = {'key:down', 'axis:righty+'},
 
-    -- Supports several keysets:
-    --   ZXC when using arrow keys
-    --   JKL when using WASD
-    --   UIO as alternate for WASD
-    --   ,./ as alternate for WASD
-    -- keyboard buttons arranged in order as: SWAP  ACTION  POUR
+      swap = {'key:q', 'button:a', 'button:rightshoulder'},
+      swap_rev = {'key:e', 'button:x', 'button:leftshoulder'},
+      weap1 = {'key:1'},
+      weap2 = {'key:2'},
+      weap3 = {'key:3'},
 
-    -- [enter] is also an action key, for use in menu
-    -- [esc] and start button are pause / unpause
+      fire = {'mouse:1'},
 
-    -- Action: activate menu item, serve drink, advance through screens
-    action = { 'key:return', 'key:i', 'key:k', 'key:z', 'key:.', 'button:a', 'mouse:1' },
+      pause = {'key:escape', 'button:start'},
+      back = {'key:backspace', 'button:b'},
+      sel = {'key:space', 'button:a', 'key:return'},
+      quit = {'key:q', 'button:back'},
 
-    -- Pour: exit menu, pour ingredient
-    pour = { 'key:o', 'key:l', 'key:c', 'key:/', 'button:b', 'mouse:2' },
-
-    -- Swap: switch hands
-    swap = { 'key:u', 'key:j', 'key:x', 'key:,', 'key:space', 'button:x', 'button:y', 'mouse:3'},
-
-    -- Pause
-    pause = { 'key:escape', 'button:start' },
-
-    -- Special for debugging
-    jumptoend = { 'key:0' },
-    skipwave = { 'key:9'},
-
-    mb1 = { 'mouse:1' },
-  },
-  pairs = {
-    move = { 'left', 'right', 'up', 'down' },
-  },
-  joystick = love.joystick.getJoysticks()[1],
-}
+      killall = {'key:k'}
+    },
+    pairs = {
+      move = {'moveleft', 'moveright', 'moveup', 'movedown'},
+      aim = {'aimleft', 'aimright', 'aimup', 'aimdown'},
+    },
+  }

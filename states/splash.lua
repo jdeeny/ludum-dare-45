@@ -24,10 +24,11 @@ function Splash:draw()
 end
 
 function Splash:update()
-  if (gameWorld.playerInput:pressed('action'))
-     and love.timer.getTime() > self.forcewatch_time and self.fade == 0
-  then
-    flux.to(self, 1.2, { fade = 1.0 }):ease("quadinout"):after(0.2, {}):oncomplete( function() gameWorld.gameState:setState('title') end )
+  if (gameWorld.playerInput:pressed('fire') or gameWorld.playerInput:pressed('sel')) then
+--     and love.timer.getTime() > self.forcewatch_time and self.fade == 0
+--  then
+    --flux.to(self, 1.2, { fade = 0.1 }):ease("quadinout"):after(0.2, {}):oncomplete( function() gameWorld.gameState:setState('title') end )
+    gameWorld.gameState:setState('title')
   end
 end
 

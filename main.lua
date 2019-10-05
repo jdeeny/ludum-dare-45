@@ -50,8 +50,3 @@ function love.focus(f)
 --    gameWorld.gameState:pushState('pause')
 --  end
 end
-
--- Always switch to a newly connected joystick
-function love.joystickadded(j)
-  if gameWorld.playerInput then gameWorld.playerInput.joystick = j end
-end
