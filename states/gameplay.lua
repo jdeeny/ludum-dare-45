@@ -2,6 +2,9 @@ local class = require 'lib.middleclass'
 local Gamestate = require 'states.gamestate'
 
 local Dude = require 'entities.dude'
+local Mario = require 'entities.kinds.enemy_mario'
+local Rock = require 'entities.kinds.object_rock'
+local Tree = require 'entities.kinds.scenery_tree'
 
 
 
@@ -16,8 +19,18 @@ end
 function GamePlay:enter()
     -- Create a dude
     self.player = Dude:new()
-    --self.player:addToWorld(self.bumpWorld)
+    --self.player:addToWorld()
     self.player:spawn()
+
+    self.mario = Mario:new()
+    self.mario:spawn()
+
+    self.rock = Rock:new()
+    self.rock:spawn()
+
+    self.tree = Tree:new()
+    self.tree:spawn()
+
 end
 
 function GamePlay:exit()

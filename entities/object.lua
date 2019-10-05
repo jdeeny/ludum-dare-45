@@ -3,26 +3,26 @@ local anim8 = require 'lib.anim8'
 local Entity = require 'entities.entity'
 local rect = require 'util.rect'
 
-local Pickup = class('Pickup', Entity)
+local Object = class('Object', Entity)
 
-function Pickup:initialize()
+function Object:initialize()
   Entity.initialize(self)
 end
 
 ---- SPAWN ----
-function Pickup:spawn()
+function Object:spawn()
 end
 
 
 ---- UPDATE ----
-function Pickup:update(dt)
+function Object:update(dt)
 end
 
 ---- DRAW ----
-function Pickup:draw()
+function Object:draw()
   love.graphics.setColor(1.0, 1.0, 1.0, 1.0)
 
 end
 
 
-return Pickup
+return Object
