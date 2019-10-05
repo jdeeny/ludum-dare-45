@@ -39,3 +39,7 @@ luac.out
 *.x86_64
 *.hex
 
+# Love2D
+.DS_Store
+._*
+bin/
