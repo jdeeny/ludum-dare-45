@@ -17,6 +17,8 @@ end
 
 -- Happens when the state is first entered: Most init stuff goes here
 function GamePlay:enter()
+    self.entities = {}
+
     -- Create a dude
     self.player = Dude:new()
     --self.player:addToWorld()
@@ -31,6 +33,10 @@ function GamePlay:enter()
     self.tree = Tree:new()
     self.tree:spawn()
 
+    self.entities[#self.entities+1] = self.player
+    self.entities[#self.entities+1] = self.mario
+    self.entities[#self.entities+1] = self.rock
+    self.entities[#self.entities+1] = self.tree
 end
 
 function GamePlay:exit()
@@ -38,14 +44,22 @@ end
 
 function GamePlay:update(dt)
   self:HandleInput()
-  if self.player.isActive then self.player:update(dt) end
+  for i,e in ipairs(self.entities) do
+    e:update(dt)
+  end
+
 end
 
 
 function GamePlay:draw()
   love.graphics.setColor(gameWorld.colors.white)
-  love.graphics.clear(1.0, 1.0, 1.0, 1.0)
-  self.player:draw()
+  love.graphics.clear(gameWorld.colors.black)
+  print("game draw"..#self.entities)
+  for i, e in ipairs(self.entities) do
+    print("Print"..i)
+    e:draw()
+  end
+
 end
 
 

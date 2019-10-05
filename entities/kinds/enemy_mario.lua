@@ -6,6 +6,7 @@ local Mario = class('Mario', Enemy)
 
 function Mario:initialize()
   Enemy.initialize(self)
+    self.drawable = gameWorld.assets.sprites.mario
 end
 
 
