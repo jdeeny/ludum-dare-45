@@ -6,10 +6,10 @@ local rect = require 'util.rect'
 local Enemy = class('Enemy', Entity)
 
 function Enemy:initialize()
+  self.props = self.props or {}
+  self.props.kind = self.props.kind or "enemy"
+  self.props.name = self.props.name or "Enemy"
   Entity.initialize(self)
-  self.props.kind = "enemy"
-  self.props.name = "Enemy"
-
 end
 
 ---- SPAWN ----

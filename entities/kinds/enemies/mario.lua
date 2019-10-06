@@ -5,10 +5,11 @@ local Enemy = require 'entities.enemy'
 local Mario = class('Mario', Enemy)
 
 function Mario:initialize()
-  Enemy.initialize(self)
+  self.props = self.props or {}
   self.props.name = "Mario"
   self.drawable = gameWorld.assets.sprites.badguy
-  self.rect:set(100, 100, self.drawable:getWidth(), self.drawable:getHeight())
+  self.props.shrink_hitbox = 0.7
+  Enemy.initialize(self)
 end
 
 return Mario

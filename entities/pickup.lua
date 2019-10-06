@@ -6,9 +6,10 @@ local rect = require 'util.rect'
 local Pickup = class('Pickup', Entity)
 
 function Pickup:initialize()
+  self.props = self.props or {}
+  self.props.kind = self.props.kind or "pickup"
+  self.props.name = self.props.name or "Pickup"
   Entity.initialize(self)
-  self.props.kind = "pickup"
-  self.props.name = "Pickup"
 end
 
 ---- SPAWN ----

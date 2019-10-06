@@ -4,10 +4,10 @@ local Pickup = require 'entities.pickup'
 local TestBottom = class('TestBottom', Pickup)
 
 function TestBottom:initialize()
-  Pickup.initialize(self)
-  self.props.name = "Test Bottom"
+  self.props = self.props or {}
+  self.props.name = "Test Bot"
   self.drawable = gameWorld.assets.sprites.tree
-  self.rect:set(100, 100, self.drawable:getWidth(), self.drawable:getHeight())
+  Pickup.initialize(self)
 end
 
 

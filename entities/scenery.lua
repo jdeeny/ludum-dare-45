@@ -6,9 +6,10 @@ local rect = require 'util.rect'
 local Scenery = class('Scenery', Entity)
 
 function Scenery:initialize()
+  self.props = self.props or {}
+  self.props.kind = self.props.kind or "scenery"
+  self.props.name = self.props.name or "Scenery"
   Entity.initialize(self)
-  self.props.kind = "scenery"
-  self.props.name = "Scenery"
 
 end
 

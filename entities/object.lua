@@ -6,10 +6,10 @@ local rect = require 'util.rect'
 local Object = class('Object', Entity)
 
 function Object:initialize()
+  self.props = self.props or {}
+  self.props.kind = self.props.kind or "object"
+  self.props.name = self.props.name or "Object"
   Entity.initialize(self)
-  self.props.kind = "object"
-  self.props.name = "Object"
-
 end
 
 ---- SPAWN ----
