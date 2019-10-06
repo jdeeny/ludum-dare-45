@@ -8,13 +8,13 @@ local Objects = {}
 Objects.rock = require('entities.kinds.objects.rock')
 
 local Hats = {}
---Hats.test = require('entities.kinds.clothing.hats.test')
+Hats.test = require('entities.kinds.clothing.hats.test')
 
 local Tops = {}
---Tops.test = require('entities.kinds.clothing.tops.test')
+Tops.test = require('entities.kinds.clothing.tops.test')
 
 local Bottoms = {}
---Bottoms.test = require('entities.kinds.clothing.bottoms.test')
+Bottoms.test = require('entities.kinds.clothing.bottoms.test')
 
 
 local Clothing = {}

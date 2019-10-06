@@ -6,6 +6,7 @@ local Mario = class('Mario', Enemy)
 
 function Mario:initialize()
   Enemy.initialize(self)
+  self.props.name = "Mario"
   self.drawable = gameWorld.assets.sprites.badguy
   self.rect:set(100, 100, self.drawable:getWidth(), self.drawable:getHeight())
 end

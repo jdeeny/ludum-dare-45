@@ -8,6 +8,8 @@ local Object = class('Object', Entity)
 function Object:initialize()
   Entity.initialize(self)
   self.props.kind = "object"
+  self.props.name = "Object"
+
 end
 
 ---- SPAWN ----

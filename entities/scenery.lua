@@ -8,6 +8,8 @@ local Scenery = class('Scenery', Entity)
 function Scenery:initialize()
   Entity.initialize(self)
   self.props.kind = "scenery"
+  self.props.name = "Scenery"
+
 end
 
 ---- SPAWN ----

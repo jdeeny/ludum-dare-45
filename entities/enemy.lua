@@ -8,6 +8,8 @@ local Enemy = class('Enemy', Entity)
 function Enemy:initialize()
   Entity.initialize(self)
   self.props.kind = "enemy"
+  self.props.name = "Enemy"
+
 end
 
 ---- SPAWN ----

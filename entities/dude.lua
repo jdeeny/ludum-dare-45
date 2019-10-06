@@ -7,6 +7,8 @@ local Dude = class('Dude', Entity)
 
 function Dude:initialize()
   Entity.initialize(self)
+  self.props.name = "Dude"
+
   self.drawable = gameWorld.assets.sprites.snowman
   self.rect:set(100, 100, self.drawable:getWidth(), self.drawable:getHeight())
   self.speed = 300
@@ -46,7 +48,7 @@ function Dude:update(dt)
 
   -- deal with the collisions
   for i=1,len do
-    print('collided with ' .. tostring(cols[i].other.props.kind))
+    print('collided with ' .. tostring(cols[i].other.props.kind) .." "..cols[i].other.props.name)
   end
 --self.bumpWorld:update(self.rect, self.rect.x, self.rect.y)
 end

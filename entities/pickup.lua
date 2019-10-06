@@ -8,6 +8,7 @@ local Pickup = class('Pickup', Entity)
 function Pickup:initialize()
   Entity.initialize(self)
   self.props.kind = "pickup"
+  self.props.name = "Pickup"
 end
 
 ---- SPAWN ----
