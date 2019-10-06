@@ -16,9 +16,10 @@ function love.load()
 --  gameWorld.settings = require('ui.settings'):new()
 --  gameWorld.settings:load()
 --  gameWorld.settings:save()
-  gameWorld.assets = cargo.init('assets')
-  print("!!!")
   gameWorld.colors = require('conf.colors')
+  gameWorld.assets = cargo.init('assets')
+  love.graphics.setFont(gameWorld.assets.fonts.generic(20))
+
 --  gameWorld.sound = require('ui.sound'):new()
 --
   gameWorld.playerInput = require('conf.controls')
