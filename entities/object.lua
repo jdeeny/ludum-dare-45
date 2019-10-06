@@ -7,11 +7,12 @@ local Object = class('Object', Entity)
 
 function Object:initialize()
   Entity.initialize(self)
+  self.props.kind = "object"
 end
 
 ---- SPAWN ----
-function Object:spawn(bumpWorld)
-  Entity.spawn(self, bumpWorld)
+function Object:spawn(bumpWorld, x, y)
+  Entity.spawn(self, bumpWorld, x, y)
 end
 
 

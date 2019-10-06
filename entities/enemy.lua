@@ -7,11 +7,12 @@ local Enemy = class('Enemy', Entity)
 
 function Enemy:initialize()
   Entity.initialize(self)
+  self.props.kind = "enemy"
 end
 
 ---- SPAWN ----
-function Enemy:spawn(bumpWorld)
-  Entity.spawn(self, bumpWorld)
+function Enemy:spawn(bumpWorld, x, y)
+  Entity.spawn(self, bumpWorld, x, y)
 end
 
 

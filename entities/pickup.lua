@@ -7,11 +7,12 @@ local Pickup = class('Pickup', Entity)
 
 function Pickup:initialize()
   Entity.initialize(self)
+  self.props.kind = "pickup"
 end
 
 ---- SPAWN ----
-function Pickup:spawn(bumpWorld)
-  Entity.spawn(self, bumpWorld)
+function Pickup:spawn(bumpWorld, x, y)
+  Entity.spawn(self, bumpWorld, x, y)
 end
 
 

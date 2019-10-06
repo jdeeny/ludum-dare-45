@@ -7,21 +7,12 @@ local Scenery = class('Scenery', Entity)
 
 function Scenery:initialize()
   Entity.initialize(self)
+  self.props.kind = "scenery"
 end
 
 ---- SPAWN ----
-function Scenery:spawn(bumpWorld)
-  Entity.spawn(self, bumpWorld)
+function Scenery:spawn(bumpWorld, x, y)
+  Entity.spawn(self, bumpWorld, x, y)
 end
-
----- UPDATE ----
-function Scenery:update(dt)
-end
-
----- DRAW ----
-function Scenery:draw()
-  love.graphics.setColor(1.0, 1.0, 1.0, 1.0)
-end
-
 
 return Scenery

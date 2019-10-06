@@ -11,6 +11,7 @@ function Entity:initialize()
   self.rect = rect:new()        -- Init rectangle
   self.props = {}               -- Init properties
   self.rect.props = self.props  -- Store property info in rect
+  self.props.kind = "entity"
 
   -- Drawing properties
   self.drawStyle = 'fill'
@@ -23,12 +24,15 @@ function Entity:addToWorld(bumpWorld)
   self.bumpWorld:add(self.rect, self.rect.x, self.rect.y, self.rect.w, self.rect.h)
 end
 
-function Entity:spawn(bumpWorld)
+function Entity:spawn(bumpWorld, x, y)
+  self.rect.x = x or 0
+  self.rect.y = y or 0
   self:addToWorld(bumpWorld)
 end
 
 
 function Entity:update(dt)
+  self.bumpWorld:update(self.rect, self.rect.x, self.rect.y)
 end
 
 function Entity:draw()
