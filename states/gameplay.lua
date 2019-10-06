@@ -24,21 +24,21 @@ function GamePlay:enter()
 
     -- Create a dude
     self.player = Dude:new()
-    self.player:spawn(self.bumpWorld)
+    self.player:spawn(self.bumpWorld, 0, 0)
 
     self.mario = Mario:new()
-    self.mario:spawn(self.bumpWorld)
+    self.mario:spawn(self.bumpWorld, love.math.random() * 500., love.math.random() * 500.)
 
     self.rock = Rock:new()
-    self.rock:spawn(self.bumpWorld)
+    self.rock:spawn(self.bumpWorld, love.math.random() * 500., love.math.random() * 500.)
 
     self.tree = Tree:new()
-    self.tree:spawn(self.bumpWorld)
+    self.tree:spawn(self.bumpWorld, love.math.random() * 500., love.math.random() * 500.)
 
-    self.entities[#self.entities+1] = self.player
     self.entities[#self.entities+1] = self.mario
     self.entities[#self.entities+1] = self.rock
     self.entities[#self.entities+1] = self.tree
+    self.entities[#self.entities+1] = self.player
 end
 
 function GamePlay:exit()
@@ -46,6 +46,12 @@ end
 
 function GamePlay:update(dt)
   self:HandleInput()
+
+  --local items, len = self.bumpWorld:getItems()
+  --for i, item in ipairs(items) do
+  --  print(item)
+  --end
+
   for i,e in ipairs(self.entities) do
     e:update(dt)
   end

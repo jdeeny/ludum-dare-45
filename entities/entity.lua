@@ -45,7 +45,7 @@ function Entity:draw()
 
   -- Draw rectangle
   if self.drawable then
-    love.graphics.draw(self.drawable, self.rect.x or 0, self.rect.y or 0) --self.drawStyle, self.rect.x, self.rect.y, self.rect.w, self.rect.h)
+    love.graphics.draw(self.drawable, self.rect.x or 0 - self.rext.props.offsetx or 0, self.rect.y or 0 - self.rext.props.offsetx or 0)
   end
 end
 

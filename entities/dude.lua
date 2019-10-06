@@ -54,8 +54,6 @@ end
 
 function Dude:collisionFilter()
   local filter = function(item, other)
-    -- Empty drink hits bar end by bartender
-    print(other.kind)
     if other.props.kind == 'enemy' then
       return 'touch'
     elseif other.props.kind == 'object' then
