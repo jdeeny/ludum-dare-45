@@ -104,22 +104,22 @@ function GamePlay:remove_entity(entity)
 end
 
 function GamePlay:spawn_surrounding_wall()
-  print("Spawn wall")
-  print(self.entity_kinds)
-  print(self.entity_kinds.objects)
-  local wall = self.entity_kinds.objects.rock
-
-  local count_x = math.floor(self.arena_w / wall.w)
-  local count_y = math.floor(self.arena_h / wall.h)
-
-  for x = 1, count_x do
-    for y = 1, count_y do
-      if x == 1 or y == 1 or x == count_x or y == count_y then
-        local w = wall:clone()
-        self:add_entity(wall:clone(), x * wall.w, y* wall.h, 'foreground')
-      end
-    end
-  end
+--  print("Spawn wall")
+--  print(self.entity_kinds)
+--  print(self.entity_kinds.objects)
+--  local wall = self.entity_kinds.objects.rock
+--
+--  local count_x = math.floor(self.arena_w / wall.w)
+--  local count_y = math.floor(self.arena_h / wall.h)
+--
+--  for x = 1, count_x do
+--    for y = 1, count_y do
+--      if x == 1 or y == 1 or x == count_x or y == count_y then
+--        local w = wall:clone()
+--        self:add_entity(wall:clone(), x * wall.w, y* wall.h, 'foreground')
+--      end
+--    end
+--  end
 end
 
 function GamePlay:spawn_player()
@@ -133,30 +133,42 @@ end
 
 function GamePlay:spawn_enemy()
   print("Spawn enemy")
+  local obj = self.entity_kinds.enemies:random():clone()
+  local x, y = self:new_location(obj)
+  print("XY: "..x.." "..y)
+  self:add_entity(obj, x, y, 'foreground')
 end
 
 function GamePlay:spawn_background_fill()
-  print("Spawn background fill")
-  local fill = self.entity_kinds.scenery.tree
-
-  local test_fill = fill:clone()
-  local count_x = math.floor(self.arena_w / test_fill.w)
-  local count_y = math.floor(self.arena_h / test_fill.h)
-
-  for x = 1, count_x do
-    for y = 1, count_y do
-        self:add_entity(test_fill:clone(), x * test_fill.w, y* test_fill.h, 'background')
-    end
-  end
+--  print("Spawn background fill")
+--  local fill = self.entity_kinds.scenery.tree
+--
+--  local test_fill = fill:clone()
+--  local count_x = math.floor(self.arena_w / test_fill.w)
+--  local count_y = math.floor(self.arena_h / test_fill.h)
+--
+--  for x = 1, count_x do
+--    for y = 1, count_y do
+--        self:add_entity(test_fill:clone(), x * test_fill.w, y* test_fill.h, 'background')
+--    end
+--  end
 end
 
 function GamePlay:spawn_object()
   print("Spawn object")
+  local obj = self.entity_kinds.objects:random():clone()
+  local x, y = self:new_location(obj)
+  print("XY: "..x.." "..y)
+  self:add_entity(obj, x, y, 'foreground')
 end
 
 
 function GamePlay:spawn_pickup()
   print("Spawn pickup")
+  local obj = self.entity_kinds.clothing:random():clone()
+  local x, y = self:new_location(obj)
+  print("XY: "..x.." "..y)
+  self:add_entity(obj, x, y, 'foreground')
 end
 
 function GamePlay:spawn_building()

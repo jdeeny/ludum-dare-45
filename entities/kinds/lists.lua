@@ -32,30 +32,30 @@ s:add(5, 'tree2', Scenery:new('tree2', sprites.scenery.tree))
 
 -- Enemies
 local e = Entities.enemies
-e:add('npc1', Enemy:new('npc1', sprites.enemies.npc1))
-e:add('npc2', Enemy:new('npc2', sprites.enemies.npc2))
-e:add('manhole', Enemy:new('manhole'), sprites.npc.manhole)
+e:add(5, 'npc1', Enemy:new('npc1', sprites.enemies.npc1))
+e:add(5, 'npc2', Enemy:new('npc2', sprites.enemies.npc2))
+e:add(5, 'manhole', Enemy:new('manhole'), sprites.npc.manhole)
 
 -- Objects
 local o = Entities.objects
-o:add('mailbox', Object:new('mailbox', sprites.objects.mailbox))
-o:add('trashcan', Object:new('transcan', sprites.objects.trashcan))
+o:add(5, 'mailbox', Object:new('mailbox', sprites.objects.mailbox))
+o:add(5, 'trashcan', Object:new('transcan', sprites.objects.trashcan))
 
 
 -- Clothing
 local c = Entities.clothing
-c.head:add('sunglasses', Head:new('sunglasses', sprites.clothing.head.Head1))
-c.head:add('lampshade', Head:new('lampshade', sprites.clothing.head.Head2))
+c.head:add(5, 'sunglasses', Head:new('sunglasses', sprites.clothing.head.Head1))
+c.head:add(5, 'lampshade', Head:new('lampshade', sprites.clothing.head.Head2))
 
-c.top:add('top-1', Top:new('top-1', sprites.clothing.top.Top1))
-c.top:add('top-2', Top:new('top-2', sprites.clothing.top.Top2))
+c.top:add(5, 'top-1', Top:new('top-1', sprites.clothing.top.Top1))
+c.top:add(5, 'top-2', Top:new('top-2', sprites.clothing.top.Top2))
 
-c.bottom:add('bottom1', Bottom:new('bottom1', sprites.clothing.bottom.Bottom1))
-c.bottom:add('bottom2', Bottom:new('bottom2', sprites.clothing.bottom.Bottom2))
+c.bottom:add(5, 'bottom1', Bottom:new('bottom1', sprites.clothing.bottom.Bottom1))
+c.bottom:add(5, 'bottom2', Bottom:new('bottom2', sprites.clothing.bottom.Bottom2))
 
-c.feet:add('feet', Feet:new('feet', sprites.clothing.feet.Feet1))
+c.feet:add(5, 'feet', Feet:new('feet', sprites.clothing.feet.Feet1))
 
-c.undergarment:add('underwear-1', Undergarment:new('underwear-1', sprites.clothing.undergarment.Underwear1))
+c.undergarment:add(5, 'underwear-1', Undergarment:new('underwear-1', sprites.clothing.undergarment.Underwear1))
 
 --c.mannequin:add('mannequin', Mannequin:new('mannequin'), sprites.mannequin.Character1)
 
