@@ -28,7 +28,7 @@ function Splash:update()
 --     and love.timer.getTime() > self.forcewatch_time and self.fade == 0
 --  then
     --flux.to(self, 1.2, { fade = 0.1 }):ease("quadinout"):after(0.2, {}):oncomplete( function() gameWorld.gameState:setState('title') end )
-    gameWorld.gameState:setState('title')
+    gameWorld.gameState:setState('gameplay')
   end
 end
 

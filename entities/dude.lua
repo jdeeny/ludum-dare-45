@@ -104,9 +104,7 @@ function Dude:drawDoll(x, y)
   love.graphics.draw(gameWorld.assets.sprites.mannequin.Character1, x, y)
 
   if self.drawable then
-    print("Draw")
     for i, v in pairs(self.clothing) do
-      print("Draw "..i)
       if v.drawable then
         --love.graphics.draw(self.drawable, self.x - (self.offsetx or 0), self.y - (self.offsety or 0))
         love.graphics.draw(v.drawable, x, y)
