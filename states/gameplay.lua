@@ -299,6 +299,7 @@ function GamePlay:draw()
 
   self.camera:detach()
   self.camera:draw()
+  self.player:drawDoll(1,1)
 end
 
 

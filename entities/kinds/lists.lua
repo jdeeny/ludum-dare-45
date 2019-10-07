@@ -57,7 +57,5 @@ c.feet:add(5, 'feet', Feet:new('feet', sprites.clothing.feet.Feet1))
 
 c.undergarment:add(5, 'underwear-1', Undergarment:new('underwear-1', sprites.clothing.undergarment.Underwear1))
 
---c.mannequin:add('mannequin', Mannequin:new('mannequin'), sprites.mannequin.Character1)
-
 
 return Entities

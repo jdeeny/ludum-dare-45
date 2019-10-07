@@ -14,13 +14,13 @@ local HEAD = 6
 
 
 function Dude:initialize()
-  self.drawable = gameWorld.assets.sprites.mannequin.Character1
+  self.drawable = gameWorld.assets.sprites.enemies.npc1
   self.shrink_hitbox = 0.7
   self.speed = 800
   self.kind = "player"
   self.name = "Dude"
   self.clothing = {}
-  self.clothing[MANNEQUIN] = nil -- mannequin
+  self.clothing[MANNEQUIN] = nil--gameWorld.gameplay.entity_kinds.mannequin.Character1
   self.clothing[HAIR] = nil -- hair
 
   Entity.initialize(self)
@@ -90,7 +90,7 @@ end
 
 function Dude:draw(x,y)
   Entity.draw(self,x,y)
-  self:drawDoll(x, y)
+  --self:drawDoll(x, y)
 end
 
 function Dude:drawDoll(x, y)
@@ -101,20 +101,15 @@ function Dude:drawDoll(x, y)
     love.graphics.setColor(self.drawColor)
   end
 
+  love.graphics.draw(gameWorld.assets.sprites.mannequin.Character1, x, y)
+
   if self.drawable then
     print("Draw")
     for i, v in pairs(self.clothing) do
       print("Draw "..i)
-      v.x = self.x - self.offsetx
-      v.y = self.y - self.offsety
       if v.drawable then
         --love.graphics.draw(self.drawable, self.x - (self.offsetx or 0), self.y - (self.offsety or 0))
-        love.graphics.draw(v.drawable, v.x - (v.offsetx or 0), v.y - (v.offsety or 0))
-        if v.debug_hitbox then
-          love.graphics.setColor(.8, .0, .8, .8)
-          love.graphics.rectangle('line', v.x, v.y, v.w, v.h)
-          love.graphics.setColor(1,1,1,1)
-        end
+        love.graphics.draw(v.drawable, x, y)
       end
 
     end
