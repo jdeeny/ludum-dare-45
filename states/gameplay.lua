@@ -18,6 +18,9 @@ function GamePlay:initialize(name)
   self.camera = Camera()
 end
 
+function uniform()
+  return math.random() * math.random()
+end
 
 function GamePlay:new_location(entity)
   local x = 0
@@ -64,23 +67,83 @@ function GamePlay:collisionFilterEmptySpace()
   return filter
 end
 
+function GamePlay:spawn_surrounding_wall()
+end
+
+function GamePlay:spawn_player()
+  self.player = Dude:new()
+  print("player: "..self.player.w.." "..self.player.h)
+  local x, y = self:new_location(self.player)
+  print("XY: "..x.." "..y)
+  self.player:spawn(self.bumpWorld, x, y)
+  self.add_entity(self.player, 'foreground')
+end
+
+function GamePlay:spawn_enemy()
+end
+
+function GamePlay:spawn_background_fill()
+end
+
+function GamePlay:spawn_pickup()
+end
+
+function GamePlay:spawn_exit()
+end
+
 -- Happens when the state is first entered: Most init stuff goes here
 function GamePlay:enter()
     self.entities = {}
+    self.entities.background = {}
+    self.entities.foreground = {}
+    self.entities.ontop = {}
 
     self.arena_w = 5000
     self.arena_h = 5000
+    self.area = self.arena_h * self.arena_w
+
     self.bumpWorld = bump.newWorld()
 
-    -- Create a dude
-    self.player = Dude:new()
-    print("player: "..self.player.w.." "..self.player.h)
-    local x, y = self:new_location(self.player)
-    print("XY: "..x.." "..y)
-    self.player:spawn(self.bumpWorld, x, y)
+    -- Create a wall around the outside
+    self:spawn_surrounding_wall()
 
+    -- Create Background scenery
+    self:spawn_background_fill()
 
-    -- Fill the level
+    -- Create a dude in a random location
+    self:spawn_player()
+
+    -- Create the exit
+    self:spawn_exit()
+
+    -- Create building clusters
+    local max = 100;
+    repeat
+      self:spawn_building()
+      max = max - 1
+    until (max == 0 or uniform() < 0.1)
+
+    -- Add Objects on top of that
+    max = 100;
+    repeat
+      self:spawn_objects()
+      max = max - 1
+    until (max == 0 or uniform() < 0.1)
+
+    -- Add in pickups
+    max = 100;
+    repeat
+      self:spawn_building()
+      max = max - 1
+    until (max == 0 or uniform() < 0.1)
+
+    -- Add in enemies
+    max = 100;
+    repeat
+      self:spawn_enemy()
+      max = max - 1
+    until (max == 0 or uniform() < 0.1)
+
 
 
 --    self.mario = self.entity_kinds.enemies.mario:new()
@@ -128,9 +191,20 @@ function GamePlay:draw()
   self.camera:attach()
   love.graphics.setColor(gameWorld.colors.white)
   love.graphics.clear(gameWorld.colors.black)
-  for i, e in ipairs(self.entities) do
+
+  -- draw Background
+  for i, e in ipairs(self.entities.background) do
     e:draw()
   end
+  -- draw foreground
+  for i, e in ipairs(self.entities.foreground) do
+    e:draw()
+  end
+  -- draw ontop
+  for i, e in ipairs(self.entities.ontop) do
+    e:draw()
+  end
+
   self.camera:detach()
   self.camera:draw()
 end
