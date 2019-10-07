@@ -88,6 +88,11 @@ function Dude:update(dt)
   end
 end
 
+function Dude:draw(x,y)
+  Entity.draw(self,x,y)
+  self:drawDoll(x, y)
+end
+
 function Dude:drawDoll(x, y)
   -- If no color specified, draw with all color values max
   if (self.drawColor == nil) then
@@ -97,8 +102,21 @@ function Dude:drawDoll(x, y)
   end
 
   if self.drawable then
-    for i, v in ipairs(self.clothing) do
-      love.graphics.draw(v.drawable, x, y)
+    print("Draw")
+    for i, v in pairs(self.clothing) do
+      print("Draw "..i)
+      v.x = self.x - self.offsetx
+      v.y = self.y - self.offsety
+      if v.drawable then
+        --love.graphics.draw(self.drawable, self.x - (self.offsetx or 0), self.y - (self.offsety or 0))
+        love.graphics.draw(v.drawable, v.x - (v.offsetx or 0), v.y - (v.offsety or 0))
+        if v.debug_hitbox then
+          love.graphics.setColor(.8, .0, .8, .8)
+          love.graphics.rectangle('line', v.x, v.y, v.w, v.h)
+          love.graphics.setColor(1,1,1,1)
+        end
+      end
+
     end
   end
   love.graphics.setColor(gameWorld.colors.white)
