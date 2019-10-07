@@ -8,6 +8,7 @@ function TestHat:initialize()
   self.props.name = "Test Hat"
   self.drawable = gameWorld.assets.sprites.tree
   Pickup.initialize(self)
+  self.props.clothing = 'head'
 end
 
 

@@ -1,6 +1,4 @@
 local class = require 'lib.middleclass'
--- local bump = require 'lib.bump'
---local rect = require 'physics.rect'
 local cargo = require 'lib.cargo'
 flux = require 'lib.flux'
 --require 'lib.pl'    -- provides on-demand lading on the penlight sublibraries

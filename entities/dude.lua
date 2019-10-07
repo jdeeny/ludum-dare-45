@@ -1,9 +1,17 @@
 local class = require 'lib.middleclass'
 local anim8 = require 'lib.anim8'
 local Entity = require 'entities.entity'
-local rect = require 'util.rect'
+
 
 local Dude = class('Dude', Entity)
+
+local MANNEQUIN = 1
+local HAIR = 2
+local UNDERWEAR = 3
+local BOTTOM = 4
+local TOP = 5
+local HEAD = 6
+
 
 function Dude:initialize()
   self.drawable = gameWorld.assets.sprites.snowman
@@ -12,6 +20,10 @@ function Dude:initialize()
   self.props.speed = 300
   self.props.kind = self.props.kind or "player"
   self.props.name = self.props.name or "Dude"
+  self.props.clothing = {}
+  self.props.clothing[MANNEQUIN] = nil -- mannequin
+  self.props.clothing[HAIR] = nil -- hair
+
   Entity.initialize(self)
 end
 
@@ -40,18 +52,59 @@ function Dude:update(dt)
   self.dx = dx
   self.dy = dy
 
-  self.rect.x = self.rect.x + self.dx * dt
-  self.rect.y = self.rect.y + self.dy * dt
-  local actualX, actualY, cols, len = self.bumpWorld:move(self.rect, self.rect.x, self.rect.y, self:collisionFilter())
-  self.rect.x = actualX;
-  self.rect.y = actualY;
+  self.x = self.x + self.dx * dt
+  self.y = self.y + self.dy * dt
+  local actualX, actualY, cols, len = self.bumpWorld:move(self, self.x, self.y, self:collisionFilter())
+  self.x = actualX;
+  self.y = actualY;
 
   -- deal with the collisions
   for i=1,len do
-    print('collided with ' .. tostring(cols[i].other.props.kind) .." "..cols[i].other.props.name)
+    local col = cols[i]
+    local other = col.other
+    local kind = other.props.kind
+
+    --print('collided with ' .. tostring(cols[i].other.props.kind) .." "..cols[i].other.props.name)
+    if kind == 'pickup' then
+      print("pick it up")
+      local clothing = other.props.clothing
+      print(clothing)
+      if clothing == 'head' then
+        print("head")
+        self.props.clothing[HEAD] = other
+      elseif clothing == 'top' then
+        print("top")
+        self.props.clothing[TOP] = other
+      elseif clothing == 'bottom' then
+        print("bottom")
+        self.props.clothing[BOTTOM] = other
+      else
+        print("Not recognized")
+      end
+      print("Remove from bumpworld")
+      self.bumpWorld:remove(other)
+    elseif kind == 'enemy' then
+      print("ouch?")
+    end
   end
---self.bumpWorld:update(self.rect, self.rect.x, self.rect.y)
 end
+
+function Dude:drawDoll(x, y)
+  -- If no color specified, draw with all color values max
+  if (self.drawColor == nil) then
+    love.graphics.setColor(gameWorld.colors.white)
+  else
+    love.graphics.setColor(self.drawColor)
+  end
+
+  if self.drawable then
+    for i, v in ipairs(self.props.clothing) do
+      love.graphics.draw(v.drawable, x, y)
+    end
+  end
+  love.graphics.setColor(gameWorld.colors.white)
+end
+
 
 
 function Dude:collisionFilter()
