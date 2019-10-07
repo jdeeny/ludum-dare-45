@@ -14,8 +14,8 @@ local HEAD = 6
 
 
 function Dude:initialize()
-  self.drawable = gameWorld.assets.sprites.snowman
-  self.shrink_hitbox = 0.5
+  self.drawable = gameWorld.assets.sprites.mannequin.Character1
+  self.shrink_hitbox = 0.7
   self.speed = 800
   self.kind = "player"
   self.name = "Dude"
