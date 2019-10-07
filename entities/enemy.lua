@@ -4,9 +4,10 @@ local Entity = require 'entities.entity'
 
 local Enemy = class('Enemy', Entity)
 
-function Enemy:initialize()
+function Enemy:initialize(name, drawable)
   self.kind = self.kind or "enemy"
-  self.name = self.name or "Enemy"
+  self.name = name or "Enemy"
+  self.drawable = drawable
   Entity.initialize(self)
 end
 

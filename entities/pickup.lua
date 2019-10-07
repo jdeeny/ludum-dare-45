@@ -4,10 +4,10 @@ local Entity = require 'entities.entity'
 
 local Pickup = class('Pickup', Entity)
 
-function Pickup:initialize()
-  self.props = self.props or {}
+function Pickup:initialize(name, drawable)
   self.kind = self.kind or "pickup"
-  self.name = self.name or "Pickup"
+  self.name = name or "Pickup"
+  self.drawable = drawable
   Entity.initialize(self)
 end
 

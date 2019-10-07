@@ -4,10 +4,10 @@ local Entity = require 'entities.entity'
 
 local Object = class('Object', Entity)
 
-function Object:initialize()
-  self.props = self.props or {}
+function Object:initialize(name, drawable)
   self.kind = self.kind or "object"
-  self.name = self.name or "Object"
+  self.name = name or "Object"
+  self.drawable = drawable
   Entity.initialize(self)
 end
 

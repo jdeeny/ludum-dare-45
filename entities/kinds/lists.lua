@@ -10,6 +10,7 @@ Entities:add(5, 'clothing', Collection:new())
 Entities:add(5, 'objects', Collection:new())
 Entities:add(5, 'enemies', Collection:new())
 Entities:add(5, 'pickups', Collection:new())
+Entities:add(5, 'walls', Collection:new())
 
 Entities.clothing:add(5, 'head', Collection:new())
 Entities.clothing:add(5, 'top', Collection:new())
@@ -26,9 +27,12 @@ local sprites = gameWorld.assets.sprites
 
 -- Scenery
 local s = Entities.scenery
-s:add(5, 'tree', Scenery:new('tree', sprites.scenery.tree))
-s:add(5, 'tree2', Scenery:new('tree2', sprites.scenery.tree))
+--s:add(5, 'tree', Scenery:new('tree', sprites.scenery.tree))
+--s:add(5, 'tree2', Scenery:new('tree2', sprites.scenery.tree))
+s:add(5, 'asphalt', Scenery:new('asphalt', sprites.scenery.asphalt))
 
+local w = Entities.walls
+w:add(5, 'wall', Object:new('wall', sprites.wall.wall))
 
 -- Enemies
 local e = Entities.enemies
