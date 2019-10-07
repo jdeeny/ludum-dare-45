@@ -7,10 +7,12 @@ function Collection:initialize()
   self.count = 0
 end
 
-function Collection:add(name, kind)
-  self.items[#self.items + 1] = kind
+function Collection:add(rank, name, kind)
+  for i=1,rank do
+    self.items[#self.items + 1] = kind
+    self.count = self.count + 1
+  end
   self[name] = kind
-  self.count = self.count + 1
 end
 
 function Collection:random()

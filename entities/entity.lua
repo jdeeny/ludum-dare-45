@@ -26,6 +26,8 @@ function Entity:initialize()
   end
 end
 
+
+
 function Entity:addToWorld(bumpWorld)
   self.bumpWorld = bumpWorld
   self.bumpWorld:add(self, self.x, self.y, self.w, self.h)
@@ -75,6 +77,10 @@ function Entity:draw()
     end
   end
   love.graphics.setColor(gameWorld.colors.white)
+end
+
+function Entity:clone()
+  return require('lib.pl.tablex').deepcopy(self)
 end
 
 return Entity
