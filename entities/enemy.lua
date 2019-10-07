@@ -5,9 +5,8 @@ local Entity = require 'entities.entity'
 local Enemy = class('Enemy', Entity)
 
 function Enemy:initialize()
-  self.props = self.props or {}
-  self.props.kind = self.props.kind or "enemy"
-  self.props.name = self.props.name or "Enemy"
+  self.kind = self.kind or "enemy"
+  self.name = self.name or "Enemy"
   Entity.initialize(self)
 end
 

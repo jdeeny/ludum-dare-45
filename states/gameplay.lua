@@ -103,6 +103,8 @@ end
 
 function GamePlay:spawn_surrounding_wall()
   print("Spawn wall")
+  print(self.entity_kinds)
+  print(self.entity_kinds.objects)
   local wall = self.entity_kinds.objects.rock
   local test_wall = wall:new()
   local count_x = math.floor(self.arena_w / test_wall.w)
