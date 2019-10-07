@@ -10,7 +10,8 @@ local HAIR = 2
 local UNDERWEAR = 3
 local BOTTOM = 4
 local TOP = 5
-local HEAD = 6
+local FEET = 6
+local HEAD = 7
 
 
 function Dude:initialize()
@@ -73,6 +74,12 @@ function Dude:update(dt)
       elseif clothing == 'top' then
         print("top")
         self.clothing[TOP] = other
+      elseif clothing == 'feet' then
+        print("feet")
+        self.clothing[FEET] = other
+      elseif clothing == 'undergarment' then
+        print("under")
+        self.clothing[UNDERWEAR] = other
       elseif clothing == 'bottom' then
         print("bottom")
         self.clothing[BOTTOM] = other
@@ -101,13 +108,13 @@ function Dude:drawDoll(x, y)
     love.graphics.setColor(self.drawColor)
   end
 
-  love.graphics.draw(gameWorld.assets.sprites.mannequin.Character1, x, y)
+  love.graphics.draw(gameWorld.assets.sprites.mannequin.Character1, x, y, 0, .5, .5)
 
   if self.drawable then
     for i, v in pairs(self.clothing) do
       if v.drawable then
         --love.graphics.draw(self.drawable, self.x - (self.offsetx or 0), self.y - (self.offsety or 0))
-        love.graphics.draw(v.drawable, x, y)
+        love.graphics.draw(v.drawable, x, y, 0, 0.5, 0.5)
       end
 
     end

@@ -18,9 +18,11 @@ end
 function Collection:random()
   local item = self.items[math.random(#self.items)]
   if item.random then
+    print("inner")
     return item:random()
   else
-    return item
+    print("item")
+    return item:clone()
   end
 end
 

@@ -7,7 +7,7 @@ x.Top = class('Top', Pickup)
 function x.Top:initialize(name, drawable)
   self.name = name
   self.drawable = drawable
-  Pickup.initialize(self)
+  Pickup.initialize(self, name, drawable)
   self.clothing = 'top'
 end
 
@@ -15,7 +15,7 @@ x.Bottom = class('Bottom', Pickup)
 function x.Bottom:initialize(name, drawable)
   self.name = name
   self.drawable = drawable
-  Pickup.initialize(self)
+  Pickup.initialize(self, name, drawable)
   self.clothing = 'bottom'
 end
 
@@ -23,7 +23,7 @@ x.Head = class('Head', Pickup)
 function x.Head:initialize(name, drawable)
   self.name = name
   self.drawable = drawable
-  Pickup.initialize(self)
+  Pickup.initialize(self, name, drawable)
   self.clothing = 'head'
 end
 
@@ -31,15 +31,15 @@ x.Undergarment = class('Undergarment', Pickup)
 function x.Undergarment:initialize(name, drawable)
   self.name = name
   self.drawable = drawable
-  Pickup.initialize(self)
-  self.clothing = 'bottom'
+  Pickup.initialize(self, name, drawable)
+  self.clothing = 'undergarment'
 end
 
 x.Feet = class('Feet', Pickup)
 function x.Feet:initialize(name, drawable)
   self.name = name
   self.drawable = drawable
-  Pickup.initialize(self)
+  Pickup.initialize(self, name, drawable)
   self.clothing = 'feet'
 end
 

@@ -8,7 +8,7 @@ function Pickup:initialize(name, drawable)
   self.kind = self.kind or "pickup"
   self.name = name or "Pickup"
   self.drawable = drawable
-  Entity.initialize(self)
+  Entity.initialize(self, name, drawable)
 end
 
 ---- SPAWN ----

@@ -15,7 +15,7 @@ function Entity:initialize()
   self.kind = self.kind or "entity"
 
   -- Drawing properties
-  self.debug_hitbox = true
+  self.debug_hitbox = false
 
   -- shrink hitbox
   if self.drawable then
@@ -36,7 +36,11 @@ end
 function Entity:spawn(bumpWorld, x, y)
   self.x = x or 0
   self.y = y or 0
-  self:addToWorld(bumpWorld)
+  if not (self.kind == 'scenery') then
+    self:addToWorld(bumpWorld)
+  else
+    self.bumpWorld = bumpWorld
+  end
 end
 
 function Entity:set(x, y, w, h)
@@ -55,7 +59,9 @@ function Entity:setSize(w, h)
 end
 
 function Entity:update(dt)
-  self.bumpWorld:update(self, self.x, self.y)
+  if not (self.kind == 'scenery') then
+    self.bumpWorld:update(self, self.x, self.y)
+  end
 end
 
 function Entity:draw()
