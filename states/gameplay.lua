@@ -15,6 +15,7 @@ local GamePlay = class('GamePlay', Gamestate)
 
 -- this only happens once at the very beginning of the program
 function GamePlay:initialize(name)
+  gameWorld.gameplay = self
   Gamestate.initialize(self, name)
   self.entity_kinds = require('entities.kinds.lists')
   self.camera = Camera()
@@ -92,7 +93,8 @@ end
 
 function GamePlay:remove_entity(entity)
   self.bumpWorld:remove(entity)
-  local sqpx = entity.w * entity.h
+  local sqpx = entity.w
+  * entity.h
   if entity.kind == 'scenery' then sqpx = 0 end
   print("Removing: "..(entity.name or "unknown?").. " Area: "..self.area.." sq px")
   for k,v in pairs(self.entities) do
@@ -133,10 +135,10 @@ end
 
 function GamePlay:spawn_enemy()
   print("Spawn enemy")
-  local obj = self.entity_kinds.enemies:random():clone()
-  local x, y = self:new_location(obj)
-  print("XY: "..x.." "..y)
-  self:add_entity(obj, x, y, 'foreground')
+  --local obj = self.entity_kinds.enemies:random():clone()
+  --local x, y = self:new_location(obj)
+  --print("XY: "..x.." "..y)
+  --self:add_entity(obj, x, y, 'foreground')
 end
 
 function GamePlay:spawn_background_fill()

@@ -31,7 +31,6 @@ function Dude:spawn(bumpWorld, x, y)
   Entity.spawn(self, bumpWorld, x, y)
 end
 
-
 ---- UPDATE ----
 function Dude:update(dt)
 
@@ -64,7 +63,7 @@ function Dude:update(dt)
     local kind = other.kind
 
     print('collided with ' .. tostring(cols[i].other.kind) .." "..cols[i].other.name)
-    if kind == 'pickup' then
+    if kind == 'pickup' or kind == 'clothing' then
       print("pick it up")
       local clothing = other.clothing
       print(clothing)
@@ -81,7 +80,8 @@ function Dude:update(dt)
         print("Not recognized")
       end
       print("Remove from bumpworld")
-      self.bumpWorld:remove(other)
+      --self.bumpWorld:remove(other)
+      if other then gameWorld.gameplay:remove_entity(other) end
     elseif kind == 'enemy' then
       print("ouch?")
     end
