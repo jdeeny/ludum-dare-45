@@ -127,7 +127,11 @@ function GamePlay:spawn_player()
   print("Spawn player")
   self.player = Dude:new()
   print("player: "..self.player.w.." "..self.player.h)
-  local x, y = self:new_location(self.player)
+  local x = 0
+  local y = 0
+  repeat
+    x, y = self:new_location(self.player)
+  until x > 500 and y > 500 and x < 5000-500 and y < 5000-500
   print("XY: "..x.." "..y)
   self:add_entity(self.player, x, y, 'foreground')
 end
@@ -167,6 +171,7 @@ end
 function GamePlay:spawn_pickup()
   print("Spawn pickup")
   local obj = self.entity_kinds.clothing:random():clone()
+  if obj.drawable == nil then print("nil drawable") end
   local x, y = self:new_location(obj)
   print("XY: "..x.." "..y)
   self:add_entity(obj, x, y, 'foreground')
@@ -224,7 +229,7 @@ function GamePlay:enter()
     repeat
       self:spawn_pickup()
       max = max - 1
-    until (max == 0 or uniform() < 0.01)
+    until (max == 0 or uniform() < 0.001)
 
     -- Add in enemies
     max = 100;
