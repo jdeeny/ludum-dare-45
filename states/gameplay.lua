@@ -73,7 +73,9 @@ end
 
 function GamePlay:add_entity(entity, x, y, layer)
   entity:spawn(self.bumpWorld, x, y)
-  self.area = self.area - entity.w * entity.h
+  local sqpx = entity.w * entity.h
+  if layer == 'background' then sqpx = 0 end
+  self.area = self.area - sqpx
   print("Spawning: "..(entity.name or "unknown?").." "..x.." "..y.." "..layer.. " Area: "..self.area.." sq px")
   for k,v in pairs(self.entities) do
     if k == layer then
@@ -84,14 +86,18 @@ end
 
 function GamePlay:remove_entity(entity)
   self.bumpWorld:remove(entity)
-  self.area = self.area + entity.w * entity.h
+  local sqpx = entity.w * entity.h
   print("Removing: "..(entity.name or "unknown?").. " Area: "..self.area.." sq px")
   for k,v in pairs(self.entities) do
+    if k == 'background' and v.entity then sqpx = 0 end
+
     v[entity] = nil
   end
+  self.area = self.area + sqpx
 end
 
 function GamePlay:spawn_surrounding_wall()
+  print("Spawn wall")
   local wall = self.entity_kinds.scenery.tree
   local test_wall = wall:new()
   local count_x = math.floor(self.arena_w / test_wall.w)
@@ -121,7 +127,16 @@ end
 
 function GamePlay:spawn_background_fill()
   print("Spawn background fill")
+  local fill = self.entity_kinds.scenery.tree
+  local test_fill = fill:new()
+  local count_x = math.floor(self.arena_w / test_fill.w)
+  local count_y = math.floor(self.arena_h / test_fill.h)
 
+  for x = 1, count_x do
+    for y = 1, count_y do
+        self:add_entity(fill:new(), x * test_fill.w, y* test_fill.h, 'background')
+    end
+  end
 end
 
 function GamePlay:spawn_object()
