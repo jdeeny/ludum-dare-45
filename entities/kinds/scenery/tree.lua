@@ -5,7 +5,7 @@ local Scenery = require 'entities.scenery'
 local Tree = class('Tree', Scenery)
 
 function Tree:initialize()
-  self.props.name = "Tree"
+  self.name = "Tree"
   self.drawable = gameWorld.assets.sprites.tree
   Scenery.initialize(self)
 end

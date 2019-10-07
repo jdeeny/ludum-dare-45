@@ -51,6 +51,10 @@ end
 
 function GamePlay:collisionFilterEmptySpace()
   local filter = function(item, other)
+    if other == nil then
+      print("No other?")
+      return nil
+    end
     if other.props.kind == 'enemy' then
       return 'touch'
     elseif other.props.kind == 'object' then
@@ -67,28 +71,74 @@ function GamePlay:collisionFilterEmptySpace()
   return filter
 end
 
+function GamePlay:add_entity(entity, x, y, layer)
+  entity:spawn(self.bumpWorld, x, y)
+  self.area = self.area - entity.w * entity.h
+  print("Spawning: "..(entity.name or "unknown?").." "..x.." "..y.." "..layer.. " Area: "..self.area.." sq px")
+  for k,v in pairs(self.entities) do
+    if k == layer then
+      v[entity] = entity
+    end
+  end
+end
+
+function GamePlay:remove_entity(entity)
+  self.bumpWorld:remove(entity)
+  self.area = self.area + entity.w * entity.h
+  print("Removing: "..(entity.name or "unknown?").. " Area: "..self.area.." sq px")
+  for k,v in pairs(self.entities) do
+    v[entity] = nil
+  end
+end
+
 function GamePlay:spawn_surrounding_wall()
+  local wall = self.entity_kinds.scenery.tree
+  local test_wall = wall:new()
+  local count_x = math.floor(self.arena_w / test_wall.w)
+  local count_y = math.floor(self.arena_h / test_wall.h)
+
+  for x = 1, count_x do
+    for y = 1, count_y do
+      if x == 1 or y == 1 or x == count_x or y == count_y then
+        self:add_entity(wall:new(), x * test_wall.w, y* test_wall.h, 'foreground')
+      end
+    end
+  end
 end
 
 function GamePlay:spawn_player()
+  print("Spawn player")
   self.player = Dude:new()
   print("player: "..self.player.w.." "..self.player.h)
   local x, y = self:new_location(self.player)
   print("XY: "..x.." "..y)
-  self.player:spawn(self.bumpWorld, x, y)
-  self.add_entity(self.player, 'foreground')
+  self:add_entity(self.player, x, y, 'foreground')
 end
 
 function GamePlay:spawn_enemy()
+  print("Spawn enemy")
 end
 
 function GamePlay:spawn_background_fill()
+  print("Spawn background fill")
+
 end
 
+function GamePlay:spawn_object()
+  print("Spawn object")
+end
+
+
 function GamePlay:spawn_pickup()
+  print("Spawn pickup")
+end
+
+function GamePlay:spawn_building()
+  print("Spawn building")
 end
 
 function GamePlay:spawn_exit()
+  print("Spawn exit")
 end
 
 -- Happens when the state is first entered: Most init stuff goes here
@@ -121,28 +171,28 @@ function GamePlay:enter()
     repeat
       self:spawn_building()
       max = max - 1
-    until (max == 0 or uniform() < 0.1)
+    until (max == 0 or uniform() < 0.01)
 
     -- Add Objects on top of that
     max = 100;
     repeat
-      self:spawn_objects()
+      self:spawn_object()
       max = max - 1
-    until (max == 0 or uniform() < 0.1)
+    until (max == 0 or uniform() < 0.01)
 
     -- Add in pickups
     max = 100;
     repeat
-      self:spawn_building()
+      self:spawn_pickup()
       max = max - 1
-    until (max == 0 or uniform() < 0.1)
+    until (max == 0 or uniform() < 0.01)
 
     -- Add in enemies
     max = 100;
     repeat
       self:spawn_enemy()
       max = max - 1
-    until (max == 0 or uniform() < 0.1)
+    until (max == 0 or uniform() < 0.01)
 
 
 
@@ -162,7 +212,7 @@ function GamePlay:enter()
 --    self.entities[#self.entities+1] = self.mario
 --    self.entities[#self.entities+1] = self.rock
 --    self.entities[#self.entities+1] = self.tree
-    self.entities[#self.entities+1] = self.player
+--    self.entities[#self.entities+1] = self.player
 --    self.entities[#self.entities+1] = self.pants
 end
 
@@ -193,15 +243,15 @@ function GamePlay:draw()
   love.graphics.clear(gameWorld.colors.black)
 
   -- draw Background
-  for i, e in ipairs(self.entities.background) do
+  for i, e in pairs(self.entities.background) do
     e:draw()
   end
   -- draw foreground
-  for i, e in ipairs(self.entities.foreground) do
+  for i, e in pairs(self.entities.foreground) do
     e:draw()
   end
   -- draw ontop
-  for i, e in ipairs(self.entities.ontop) do
+  for i, e in pairs(self.entities.ontop) do
     e:draw()
   end
 
