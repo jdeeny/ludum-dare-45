@@ -3,6 +3,8 @@ local bump = require("lib.bump")
 local Gamestate = require 'states.gamestate'
 local Camera = require 'lib.camera'
 local Dude = require 'entities.dude'
+local Entity = require 'entities.entity'
+local tablex = require('lib.pl.tablex')
 --local Mario = require 'entities.kinds.enemy_mario'
 --local Rock = require 'entities.kinds.object_rock'
 --local Tree = require 'entities.kinds.scenery_tree'
@@ -18,7 +20,7 @@ function GamePlay:initialize(name)
   self.camera = Camera()
 end
 
-function uniform()
+local function uniform()
   return math.random() * math.random()
 end
 
@@ -80,7 +82,7 @@ function GamePlay:add_entity(entity, x, y, layer)
   local sqpx = entity.w * entity.h
   if layer == 'background' or entity.kind == 'scenery' then sqpx = 0 end
   self.area = self.area - sqpx
-  print("Spawning: "..(entity.name or "unknown?").." "..x.." "..y.." "..layer.. " Area: "..self.area.." sq px")
+  -- print("Spawning: "..(entity.name or "unknown?").." "..x.." "..y.." "..layer.. " Area: "..self.area.." sq px")
   for k,v in pairs(self.entities) do
     if k == layer then
       v[entity] = entity
@@ -134,18 +136,18 @@ function GamePlay:spawn_enemy()
 end
 
 function GamePlay:spawn_background_fill()
---  print("Spawn background fill")
---  local fill = self.entity_kinds.scenery.tree
---  local test_fill = fill:new()
---  local count_x = math.floor(self.arena_w / test_fill.w)
---  local count_y = math.floor(self.arena_h / test_fill.h)
---
---  for x = 1, count_x do
---    for y = 1, count_y do
---        print("!")
---        self:add_entity(fill:clone(), x * test_fill.w, y* test_fill.h, 'background')
---    end
-  --end
+  print("Spawn background fill")
+  local fill = self.entity_kinds.scenery.tree
+
+  local test_fill = fill:clone()
+  local count_x = math.floor(self.arena_w / test_fill.w)
+  local count_y = math.floor(self.arena_h / test_fill.h)
+
+  for x = 1, count_x do
+    for y = 1, count_y do
+        self:add_entity(test_fill:clone(), x * test_fill.w, y* test_fill.h, 'background')
+    end
+  end
 end
 
 function GamePlay:spawn_object()

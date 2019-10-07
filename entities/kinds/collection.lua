@@ -16,7 +16,7 @@ function Collection:add(rank, name, kind)
 end
 
 function Collection:random()
-  local item = self.items[random(#self.items)]
+  local item = self.items[math.random(#self.items)]
   if item.random then
     return item:random()
   else
