@@ -16,7 +16,7 @@ end
 
 function Splash:draw()
   love.graphics.setColor(gameWorld.colors.white)
-  --love.graphics.draw(gameWorld.assets.splash.splash)
+  love.graphics.draw(gameWorld.assets.sprites.title, 0, 0)
   if self.fade > 0 then
     love.graphics.setColor(0.0, 0.0, 0.0, self.fade)
     love.graphics.rectangle('fill', 0, 0, 1280, 720)
@@ -25,9 +25,9 @@ end
 
 function Splash:update()
   if (gameWorld.playerInput:pressed('fire') or gameWorld.playerInput:pressed('sel')) then
---     and love.timer.getTime() > self.forcewatch_time and self.fade == 0
---  then
-    --flux.to(self, 1.2, { fade = 0.1 }):ease("quadinout"):after(0.2, {}):oncomplete( function() gameWorld.gameState:setState('title') end )
+    -- and love.timer.getTime() > self.forcewatch_time and self.fade == 0
+  --then
+    --flux.to(self, 1.2, { fade = 0.1 }):ease("quadinout"):after(0.2, {}):oncomplete( function() gameWorld.gameState:setState('gameplay') end )
     gameWorld.gameState:setState('gameplay')
   end
 end
