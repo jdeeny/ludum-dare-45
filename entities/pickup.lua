@@ -6,8 +6,8 @@ local Pickup = class('Pickup', Entity)
 
 function Pickup:initialize()
   self.props = self.props or {}
-  self.props.kind = self.props.kind or "pickup"
-  self.props.name = self.props.name or "Pickup"
+  self.kind = self.kind or "pickup"
+  self.name = self.name or "Pickup"
   Entity.initialize(self)
 end
 

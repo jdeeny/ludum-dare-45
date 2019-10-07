@@ -7,7 +7,7 @@ local Rock = class('Rock', Object)
 function Rock:initialize()
   self.name = "Rock"
   self.drawable = gameWorld.assets.sprites.rock
-  self.shrink_hitbox = 0.5
+  self.shrink_hitbox = 0.9
   Object.initialize(self)
 end
 

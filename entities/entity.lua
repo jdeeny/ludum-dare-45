@@ -12,17 +12,17 @@ function Entity:initialize()
   self.bumpWorld = nil
   self.props = self.props or {}               -- Init properties
   self.props = self.props  -- Store property info in rect
-  self.props.kind = self.props.kind or "entity"
+  self.kind = self.kind or "entity"
 
   -- Drawing properties
-  self.props.debug_hitbox = true
+  self.debug_hitbox = true
 
   -- shrink hitbox
   if self.drawable then
-    local shrink = self.props.shrink_hitbox or 1.0
+    local shrink = self.shrink_hitbox or 1.0
     self:set(0, 0, self.drawable:getWidth() * shrink, self.drawable:getHeight() * shrink)
-    self.props.offsetx = self.drawable:getWidth() * (1-shrink) /2
-    self.props.offsety = self.drawable:getHeight() * (1-shrink) /2
+    self.offsetx = self.drawable:getWidth() * (1-shrink) /2
+    self.offsety = self.drawable:getHeight() * (1-shrink) /2
   end
 end
 
@@ -66,9 +66,9 @@ function Entity:draw()
 
   -- Draw rectangle
   if self.drawable then
-    --love.graphics.draw(self.drawable, self.x - (self.props.offsetx or 0), self.y - (self.props.offsety or 0))
-    love.graphics.draw(self.drawable, self.x - (self.props.offsetx or 0), self.y - (self.props.offsety or 0))
-    if self.props.debug_hitbox then
+    --love.graphics.draw(self.drawable, self.x - (self.offsetx or 0), self.y - (self.offsety or 0))
+    love.graphics.draw(self.drawable, self.x - (self.offsetx or 0), self.y - (self.offsety or 0))
+    if self.debug_hitbox then
       love.graphics.setColor(.8, .0, .8, .8)
       love.graphics.rectangle('line', self.x, self.y, self.w, self.h)
       love.graphics.setColor(1,1,1,1)

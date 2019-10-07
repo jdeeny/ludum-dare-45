@@ -15,14 +15,13 @@ local HEAD = 6
 
 function Dude:initialize()
   self.drawable = gameWorld.assets.sprites.snowman
-  self.props = self.props or {}
-  self.props.shrink_hitbox = 0.5
-  self.props.speed = 300
-  self.props.kind = self.props.kind or "player"
-  self.props.name = self.props.name or "Dude"
-  self.props.clothing = {}
-  self.props.clothing[MANNEQUIN] = nil -- mannequin
-  self.props.clothing[HAIR] = nil -- hair
+  self.shrink_hitbox = 0.5
+  self.speed = 800
+  self.kind = "player"
+  self.name = "Dude"
+  self.clothing = {}
+  self.clothing[MANNEQUIN] = nil -- mannequin
+  self.clothing[HAIR] = nil -- hair
 
   Entity.initialize(self)
 end
@@ -39,8 +38,8 @@ function Dude:update(dt)
   local DEADBAND = 0.1
   local move_x, move_y = gameWorld.playerInput:get('move')
 
-  local dx = move_x > DEADBAND and self.props.speed or move_x < -DEADBAND and -self.props.speed or 0
-  local dy = move_y > DEADBAND and self.props.speed or move_y < -DEADBAND and -self.props.speed or 0
+  local dx = move_x > DEADBAND and self.speed or move_x < -DEADBAND and -self.speed or 0
+  local dy = move_y > DEADBAND and self.speed or move_y < -DEADBAND and -self.speed or 0
 
   if math.abs(dx) >= 0.01 and math.abs(dy) >= 0.01 then
       -- 1/sqrt(2)
@@ -62,22 +61,22 @@ function Dude:update(dt)
   for i=1,len do
     local col = cols[i]
     local other = col.other
-    local kind = other.props.kind
+    local kind = other.kind
 
-    --print('collided with ' .. tostring(cols[i].other.props.kind) .." "..cols[i].other.props.name)
+    print('collided with ' .. tostring(cols[i].other.kind) .." "..cols[i].other.name)
     if kind == 'pickup' then
       print("pick it up")
-      local clothing = other.props.clothing
+      local clothing = other.clothing
       print(clothing)
       if clothing == 'head' then
         print("head")
-        self.props.clothing[HEAD] = other
+        self.clothing[HEAD] = other
       elseif clothing == 'top' then
         print("top")
-        self.props.clothing[TOP] = other
+        self.clothing[TOP] = other
       elseif clothing == 'bottom' then
         print("bottom")
-        self.props.clothing[BOTTOM] = other
+        self.clothing[BOTTOM] = other
       else
         print("Not recognized")
       end
@@ -98,7 +97,7 @@ function Dude:drawDoll(x, y)
   end
 
   if self.drawable then
-    for i, v in ipairs(self.props.clothing) do
+    for i, v in ipairs(self.clothing) do
       love.graphics.draw(v.drawable, x, y)
     end
   end
@@ -109,13 +108,13 @@ end
 
 function Dude:collisionFilter()
   local filter = function(item, other)
-    if other.props.kind == 'enemy' then
+    if other.kind == 'enemy' then
       return 'touch'
-    elseif other.props.kind == 'object' then
+    elseif other.kind == 'object' then
       return 'touch'
-    elseif other.props.kind == 'pickup' then
+    elseif other.kind == 'pickup' then
       return 'cross'
-    elseif other.props.kind == 'scenery' then
+    elseif other.kind == 'scenery' then
       return nil
     end
 

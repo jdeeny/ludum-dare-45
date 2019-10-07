@@ -55,13 +55,17 @@ function GamePlay:collisionFilterEmptySpace()
       print("No other?")
       return nil
     end
-    if other.props.kind == 'enemy' then
+    if other.kind == 'enemy' then
+      print("collide enemy")
       return 'touch'
-    elseif other.props.kind == 'object' then
+    elseif other.kind == 'object' then
+      print("collide obj")
       return 'touch'
-    elseif other.props.kind == 'pickup' then
+    elseif other.kind == 'pickup' then
+      print("collide pick")
       return 'touch'
-    elseif other.props.kind == 'scenery' then
+    elseif other.kind == 'scenery' then
+      print("collide scenery")
       return nil
     end
 
@@ -74,7 +78,7 @@ end
 function GamePlay:add_entity(entity, x, y, layer)
   entity:spawn(self.bumpWorld, x, y)
   local sqpx = entity.w * entity.h
-  if layer == 'background' then sqpx = 0 end
+  if layer == 'background' or entity.kind == 'scenery' then sqpx = 0 end
   self.area = self.area - sqpx
   print("Spawning: "..(entity.name or "unknown?").." "..x.." "..y.." "..layer.. " Area: "..self.area.." sq px")
   for k,v in pairs(self.entities) do
@@ -87,6 +91,7 @@ end
 function GamePlay:remove_entity(entity)
   self.bumpWorld:remove(entity)
   local sqpx = entity.w * entity.h
+  if entity.kind == 'scenery' then sqpx = 0 end
   print("Removing: "..(entity.name or "unknown?").. " Area: "..self.area.." sq px")
   for k,v in pairs(self.entities) do
     if k == 'background' and v.entity then sqpx = 0 end
@@ -98,7 +103,7 @@ end
 
 function GamePlay:spawn_surrounding_wall()
   print("Spawn wall")
-  local wall = self.entity_kinds.scenery.tree
+  local wall = self.entity_kinds.objects.rock
   local test_wall = wall:new()
   local count_x = math.floor(self.arena_w / test_wall.w)
   local count_y = math.floor(self.arena_h / test_wall.h)
@@ -245,8 +250,10 @@ function GamePlay:update(dt)
   --  print(item)
   --end
 
-  for i,e in ipairs(self.entities) do
-    e:update(dt)
+  for k,l in pairs(self.entities) do
+    for i, e in pairs(l) do
+      e:update(dt)
+    end
   end
 
 end

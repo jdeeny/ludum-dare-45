@@ -6,8 +6,8 @@ local Object = class('Object', Entity)
 
 function Object:initialize()
   self.props = self.props or {}
-  self.props.kind = self.props.kind or "object"
-  self.props.name = self.props.name or "Object"
+  self.kind = self.kind or "object"
+  self.name = self.name or "Object"
   Entity.initialize(self)
 end
 
